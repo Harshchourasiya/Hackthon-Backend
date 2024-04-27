@@ -14,7 +14,7 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ error: "Email is already exist" });
     }
 
-    const newUser = new User({
+    const newUser = new UserSchema({
       name,
       email,
       password,
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 
   try {
     // Find the user by email
-    const user = await User.findOne({ email });
+    const user = await UserSchema.findOne({ email });
     // Check if user exists
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
