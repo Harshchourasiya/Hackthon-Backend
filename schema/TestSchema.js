@@ -1,41 +1,41 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const TestSchema = new Schema({
   id: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
+  //Description
   des: {
     type: String,
-    required: true
+    required: true,
   },
   role: {
     type: String,
-    required: true
+    required: true,
   },
   ctc: {
     type: Number,
-    required: true
+    required: true,
   },
   location: {
     type: String,
-    required: true
+    required: true,
   },
   course: {
     type: [String],
-    required: true
+    required: true,
   },
   eligibility: {
     type: [String],
-    required: true
-  }
+    required: true,
+  },
 });
 
-
-module.exports = mongoose.model('test', TestSchema);
+module.exports = mongoose.model("test", TestSchema);

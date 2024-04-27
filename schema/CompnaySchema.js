@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   country: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   about: {
     type: String,
@@ -21,19 +21,19 @@ const schema = new mongoose.Schema({
     required: true,
     unique: true,
     validate: {
-      validator: function(value) {
+      validator: function (value) {
         return /^[\w-\.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value);
       },
-      message: 'Please enter a valid email address'
-    }
+      message: "Please enter a valid email address",
+    },
   },
   sector: {
     type: String,
-    required: true
+    required: true,
   },
   test: {
-    type: [String]
-  }
+    type: [String],
+  },
 });
 
-module.exports = mongoose.model('company', schema);
+module.exports = mongoose.model("Company", schema);

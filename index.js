@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require('./helper/databaseUtility').connectToServer;
+require("./helper/databaseUtility").connectToServer;
 
 // middleware to get the data from frontend , can be in multiple forms , json, html, urlencoded ,etc
 const bodyParser = require("body-parser");
