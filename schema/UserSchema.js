@@ -43,7 +43,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  Blogs: {
+  blogs: {
     type: [String],
   },
 });

@@ -11,18 +11,16 @@ const discussionSchema = new Schema({
     type: String,
     required: true
   },
-  des: {
+  content: {
     type: String,
     required: true
   },
   comment: [{
     name: {
       type: String,
-      required: true
     },
-    content: {
+    comment: {
       type: String,
-      required: true
     }
   }]
 });
