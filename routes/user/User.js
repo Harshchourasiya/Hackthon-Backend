@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const UserSchema = require("../../Schema/UserSchema.js");
 const Test = require("../../schema/TestSchema.js");
+const Home = require("./homepage/Home.js");
+
+router.use('/home', Home);
 
 // POST route for jobSeeker signup
 router.post("/signup", async (req, res) => {
