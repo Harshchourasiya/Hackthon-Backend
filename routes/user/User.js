@@ -11,9 +11,8 @@ router.use('/discussion', Discussion);
 
 // POST route for jobSeeker signup
 router.post("/signup", async (req, res) => {
-  const { name, email, password, resumelink, participate, degree, Blogs } =
+  const { name, email, password, resumelink, degree} =
     req.body;
-
   try {
     const existingUser = await UserSchema.findOne({ email });
     if (existingUser) {
@@ -25,9 +24,7 @@ router.post("/signup", async (req, res) => {
       email,
       password,
       resumelink,
-      participate,
       degree,
-      Blogs,
     });
 
     // Save the new user to the database
@@ -38,7 +35,7 @@ router.post("/signup", async (req, res) => {
       .json({ message: "User created successfully", user: newUser });
   } catch (error) {
     console.error("User creation error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(400).json({ error: "Internal server error" });
   }
 });
 
@@ -66,25 +63,5 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// recommend test
-router.get("/:degree", async (req, res) => {
-  const { degree } = req.params;
-  try {
-    // const user = await
-  } catch (error) {}
-});
-
-// All test
-router.get("/tests", async (req, res) => {
-  try {
-    // Fetch all tests from the database
-    const tests = await Test.find({}, { _id: 0 });
-    // Return the tests in JSON format
-    res.status(200).json({ tests });
-  } catch (error) {
-    console.error("Error fetching tests:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
 
 module.exports = router;
