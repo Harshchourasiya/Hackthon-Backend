@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Company = require("../../Schema/CompnaySchema");
 const Test = require("../../schema/TestSchema");
-const { generateId } = require('../../helper/utilFuctions');
+const { generateId } = require('../../helper/utilFunctions');
 
 // POST route for company signup
 router.post("/signup", async (req, res) => {
