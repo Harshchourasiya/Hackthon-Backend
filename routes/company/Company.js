@@ -12,7 +12,7 @@ router.post("/signup", async (req, res) => {
     // Create a new company instance
     const newCompany = new Company({
       name,
-      country,
+      country,  
       about,
       email,
       sector,
@@ -37,16 +37,12 @@ router.post("/login", async (req, res) => {
 
   try {
     // Find the user by email
-    const user = await Company.findOne({ email });
+    const user = await Company.findOne({ email: email, password : password });
     // Check if user exists
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    // Compare passwords
-    if (password !== Company.password) {
-      return res.status(401).json({ error: "Invalid email or password" });
-    }
     // User is authenticated
     res.status(200).json({ message: "Login successful", Company });
   } catch (error) {
@@ -62,15 +58,16 @@ We want all the data that is requied in the schema from frontend
 //*!NOTE: email of the company
 */
 router.post('/createOrEditTest', async (req, res) => {
-  const { email, id, title, des, role, ctc, location, course, eligibility } = req.body;
+  const { email, id, title, des, role, ctc, location, eligibility } = req.body;
   const company = await Company.findOne({ email: email });
-  if (!company)  res.status(401).json({ "message": "Invalid Company"});
+  if (false)  res.status(401).json({ "message": "Invalid Company"});
   else {
     if (id) {
       // If Id exists, update the test
       try {
-        const test = await Test.findOneAndUpdate({ id: id }, { title, des, ctc, role, location, course, eligibility }, { new: true });
+        const test = await Test.findOneAndUpdate({ id: id }, { title, des, ctc, role, location, eligibility }, { new: true });
         if (test) {
+          await test.save();
           res.status(200).json({ "data": test });
         } else {
           res.status(401).json({ "message": "Invalid Test"});
@@ -81,13 +78,17 @@ router.post('/createOrEditTest', async (req, res) => {
     } else {
       // if Id not exists, create a new test
       const testId = generateId();
-      const test = new Test({ id: testId, title, des: des, ctc: ctc, role: role, location: location, course: course, eligibility: eligibility });
+      const object = { id: testId, title, des, ctc, role, location, eligibility };
+      const test = new Test(object);
       try {
         await test.save();
+       if (company) {
         company.test.push(testId);
         await company.save();
+       }
         res.status(200).json({"data": test });
       } catch (err) {
+        console.log(err);
         res.status(401).json({ "message": "Failed"});
       }
     }
@@ -100,7 +101,7 @@ to get all the test that the company created
 //*!NOTE: I need Email which will be used as a ID 
 */
 router.get('/getAllTest', async (req, res) => {
-  const email = req.body.email;
+  const email = req.query.email;
   const data = await Company.findOne({ email: email });
   if (data) {
     const resData = []

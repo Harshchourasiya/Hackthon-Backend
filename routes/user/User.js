@@ -45,14 +45,9 @@ router.post("/login", async (req, res) => {
 
   try {
     // Find the user by email
-    const user = await UserSchema.findOne({ email });
+    const user = await UserSchema.findOne({ email: email, password : password });
     // Check if user exists
     if (!user) {
-      return res.status(401).json({ error: "Invalid email or password" });
-    }
-
-    // Compare passwords
-    if (password !== user.password) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
     // User is authenticated
@@ -61,6 +56,13 @@ router.post("/login", async (req, res) => {
     console.error("Login error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
+});
+
+
+router.post("/apply", async(req, res)=> {
+  // applyed
+
+  res.status(200).json({"message": "applied"});
 });
 
 

@@ -21,7 +21,7 @@ router.get('/search', async(req, res)=> {
 // need: degree
 
 router.get("/recommended", async(req, res)=> {
-    const degree = req.body.degree;
+    const degree = req.query.degree;
     if (degree) {
         const resData = await Test.find({ eligibility: { $regex: degree, $options: 'i' } });
         res.status(200).json({"data": resData});

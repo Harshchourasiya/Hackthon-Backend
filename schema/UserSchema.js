@@ -11,14 +11,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: function (value) {
-        return /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,7})$/.test(
-          value
-        );
-      },
-      message: "Please enter a valid email address",
-    },
   },
   password: {
     type: String,
@@ -27,14 +19,6 @@ const userSchema = new Schema({
   resumelink: {
     type: String,
     required: true,
-    validate: {
-      validator: function (value) {
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(
-          value
-        );
-      },
-      message: "Please enter a valid URL",
-    },
   },
   participate: {
     type: [String],

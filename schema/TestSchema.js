@@ -21,15 +21,11 @@ const TestSchema = new Schema({
     required: true,
   },
   ctc: {
-    type: Number,
+    type: String,
     required: true,
   },
   location: {
     type: String,
-    required: true,
-  },
-  course: {
-    type: [String],
     required: true,
   },
   eligibility: {

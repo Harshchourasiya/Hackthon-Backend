@@ -25,12 +25,6 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: function (value) {
-        return /^[\w-\.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value);
-      },
-      message: "Please enter a valid email address",
-    },
   },
   sector: {
     type: String,
